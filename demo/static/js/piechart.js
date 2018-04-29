@@ -11,6 +11,26 @@ window.onload = function(){
 }
 
 $(document).ready(function() {
+
+	function saveImageVideoFeed() {
+		var canvas = document.getElementsByTagName('canvas')[0];
+		let dataURL = canvas.toDataURL('image/jpeg', 1.0);
+		$.ajax({
+			type: "POST",
+			url: "/images/upload",
+			data: {
+			   file: dataURL
+			}
+		}).done(function(o) {
+			console.log(o);
+			// If you want the file to be visible in the browser
+			// - please modify the callback in javascript. All you
+			// need is to return the url to the file, you just saved
+			// and than put the image in your browser.
+		});
+	}
+
+	setInterval(saveImageVideoFeed, 5000);
 	var pie = new d3pie(document.getElementById("pieChart"), {
 		"header": {
 			"title": {
