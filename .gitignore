@@ -103,5 +103,6 @@ venv.bak/
 .mypy_cache/
 
 demo/static/images/*
+*storage
 .DS*
 ._*
