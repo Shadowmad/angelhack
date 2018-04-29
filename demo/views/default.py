@@ -17,14 +17,14 @@ def eventInfo():
 				"$group":
 				{
 					"_id": "$item",
-					"avgAnger": { "$avg": "$anger" },
-					"avgContempt": { "$avg": "$contempt" },
-					"avgDisgust": { "$avg": "$disgust" },
-					"avgFear": { "$avg": "$fear" },
-					"avgHappiness": { "$avg": "$happiness" },
-					"avgNeutral": { "$avg": "$neutral" },
-					"avgSadness": { "$avg": "$sadness" },
-					"avgSurprise": { "$avg": "$surprise" },
+					"Anger": { "$avg": "$anger" },
+					"Contempt": { "$avg": "$contempt" },
+					"Disgust": { "$avg": "$disgust" },
+					"Fear": { "$avg": "$fear" },
+					"Happiness": { "$avg": "$happiness" },
+					"Neutral": { "$avg": "$neutral" },
+					"Sadness": { "$avg": "$sadness" },
+					"Surprise": { "$avg": "$surprise" },
 				}
 			}
 		]
