@@ -27,5 +27,5 @@ response = requests.post(text_recognition_api_url, headers = headers, data = dat
 if response.ok:
 	data = response.json()
 	scores = [sentiment["score"] for sentiment in data["documents"]]
-with open("../storage/scores.json", "w") as file:
+with open("demo/storage/scores.json", "w") as file:
 	json.dump(scores, file)
