@@ -13,9 +13,15 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://d3js.org/d3.v5.min.js"></script>
+
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
 		<script type="text/javascript" src="/static/js/d3pie.min.js"></script>
 		<script type="text/javascript" src="/static/js/piechart.js"></script>
 		<script type="text/javascript" src="/static/js/camvas.js"></script>
+		<script type="text/javascript" src="/static/js/chart.js"></script>
 		<link rel="stylesheet" href="/static/css/style.css">
 	</head>
 	<body>
@@ -37,13 +43,99 @@
 			  </div>
 			</nav>
 			<div class="row">
-				<div class="col marginatig">
+				<div class="col-7 marginatig">
 					<canvas id="canvas"></canvas>
+				</div>
+				<div class="col-5 marginatigchild">
+					<!-- <div id="pieChart"></div> -->
+					<div id="highchart" ></div>
 				</div>
 			</div>
 			<div class="row marginatig">
 				<div class="col">
-					<div id="pieChart"></div>
+					<h1 class="text-center">
+						Most Recent Events
+					</h1>
+				</div>
+			</div>
+			<div class="row marginatig">
+				<div class="table-responsive">
+				    <table class="table text-center table-striped table-bordered">
+						<thead>
+							<tr>
+								<th scope="col">
+									Event name
+								</th>
+								<th scope="col">
+									Event date
+								</th>
+								<th scope="col">
+									Event Place
+								</th>
+								<th scope="col">
+									Event ESMT
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">
+									Boxing match: McGregor vs. Mayweather
+								</th>
+								<td>
+									April 10th, 2017
+								</td>
+								<td>
+									Las Vegas Grand Boxing Arena
+								</td>
+								<td class="text-success">
+									97%
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									Rab battle: MC ^2 vs. Borodach
+								</th>
+								<td>
+									March 1st, 2018
+								</td>
+								<td>
+									Grand Palace of Nostromo Dorms
+								</td>
+								<td class="text-success">
+									99%
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									Hackathon: Development of ESMT
+								</th>
+								<td>
+									Today
+								</td>
+								<td>
+									At convergence of meaning of life and everything
+								</td>
+								<td class="text-success">
+									100%
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									UEFA Champions League: Juventus vs. Real Madrid
+								</th>
+								<td>
+									2 weeks ago
+								</td>
+								<td>
+									Santiago Bernabéu Stadium
+								</td>
+								<td class="text-warning">
+									70%
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

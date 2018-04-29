@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from demo import app
 from demo.scripts import mongo
+import random
 
 @app.route('/')
 def home():
@@ -23,7 +24,7 @@ def eventInfo():
 					"Disgust": { "$avg": "$disgust" },
 					"Fear": { "$avg": "$fear" },
 					"Happiness": { "$avg": "$happiness" },
-					"Neutral": { "$avg": "$neutral" },
+					# "Neutral": { "$avg": "$neutral" },
 					"Sadness": { "$avg": "$sadness" },
 					"Surprise": { "$avg": "$surprise" },
 				}
@@ -31,7 +32,26 @@ def eventInfo():
 		]
 	)
 	client.close()
-	return jsonify(list(result)[0])
+	result = list(result)
+	if result:
+		return jsonify(list(result)[0])
+	else:
+		return jsonify({'No data': 1})
+
+@app.route('/event/infofake')
+def eventInfoFake():
+	fake = {
+		"Anger": random.uniform(0.1, 0.3),
+		"Contempt": random.uniform(0.1, 0.3), 
+		"Disgust": random.uniform(0.1, 0.3), 
+		"Fear": random.uniform(0.1, 0.3), 
+		"Happiness": random.uniform(0.1, 0.3), 
+		"Neutral": random.uniform(0.1, 0.3), 
+		"Sadness": random.uniform(0.1, 0.3), 
+		"Surprise": random.uniform(0.1, 0.3), 
+		"_id": "asd"
+	}
+	return jsonify(fake)
 
 @app.route('/static/<path:path>')
 def static_file(path):

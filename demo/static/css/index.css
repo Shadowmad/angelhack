@@ -1,6 +1,8 @@
+body {
+	background-color: #b1b1b159;
+}
 #canvas {
-	width: 80%;
-	height: auto;
+
 	margin: auto;
 	display: block;
 }
@@ -8,3 +10,13 @@
 .marginatig {
 	margin-top: 30px;
 }
+
+.marginatigchild {
+	margin-top: 5%;
+}
+
+/* .table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: rgba(76, 70, 70, 0.25); // Choose your own color here
+ }
+ */

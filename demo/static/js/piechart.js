@@ -4,15 +4,53 @@
 // In this example call, we will directly draw the webcam stream on a canvas.
 window.onload = function(){
 	var ctx = document.getElementsByTagName('canvas')[0].getContext('2d');
-	$("#canvas").attr('width', window.innerWidth / 4);
-	$("#canvas").attr('height',  3 * window.innerWidth / 16);
+	$("#canvas").attr('width', window.innerWidth / 2);
+	$("#canvas").attr('height',  3 * window.innerWidth / 8);
 	// ctx.canvas.width = window.innerWidth;
 	// ctx.canvas.height = 3 * window.innerWidth / 4;
 	var draw = function(video, dt) {
-		ctx.drawImage(video, 0, 0, window.innerWidth / 4, 3 * window.innerWidth / 16)
+		ctx.drawImage(video, 0, 0, window.innerWidth / 2, 3 * window.innerWidth / 8)
 	}
 	var myCamvas = new camvas(ctx, draw)
 }
+
+window.pieData = [];
+
+function getEventInfo(cb, pie, value) {
+	newData = [];
+	$.ajax({
+		type: "GET",
+		url: "/event/info",
+		cache: false,
+		contentType: false,
+		processData: false,
+	}).done(function(data) {
+		for (field in data) {
+			if (field != "_id") {
+				newData.push({
+					label: field.toString(),
+					value: value ? value : data[field]
+				});
+			}
+		}
+		cb(pie, newData);
+	});
+}
+
+function updatePieData(pie, data) {
+		if (window.pieData.length == 0) {
+			window.pieData = data;
+			pie.updateProp("data.content", window.pieData);
+		} else {
+			for (item in data) {
+				window.pieData.find((el, idx) => {
+					if (el.label == item.label) {
+						window.pieData[idx].value = el.value;
+					}
+				})
+			}
+		}
+	};
 
 $(document).ready(function() {
 	function base64ToBlob(base64, mime)
@@ -61,128 +99,136 @@ $(document).ready(function() {
 		});
 	}
 
-	function updatePieData() {
-
-		$.ajax({
-			type: "GET",
-			url: "/event/info",
-			cache: false,
-			contentType: false,
-			processData: false,
-		}).done(function(data) {
-			oldPieData = pie["data"]
-			for (emotion in data) {
-				oldPieData[emotion] = data[emotion]
-			}
-		});
-	}
-
 	setInterval(saveImageVideoFeed, 5000);
-	var pie = new d3pie(document.getElementById("pieChart"), {
-		"header": {
-			"title": {
-				"text": "Event Happiness Chart",
-				"color": "#000000",
-				"fontSize": 24,
-				"font": "open sans"
-			},
-			"titleSubtitlePadding": 20
-		},
-		"footer": {
-			"color": "#999999",
-			"fontSize": 10,
-			"font": "open sans",
-			"location": "bottom"
-		},
-		"size": {
-			"canvasWidth": 590,
-			"pieInnerRadius": "50%",
-			"pieOuterRadius": "100%"
-		},
-		"data": {
-			"sortOrder": "value-desc",
-			"content": [
-				{
-					"label": "Happiness",
-					"value": 10,
-					"color": "#00ff00"
-				},
-				{
-					"label": "Sadness",
-					"value": 10,
-					"color": "#8b6834"
-				},
-				{
-					"label": "Anger",
-					"value": 10,
-					"color": "#ff0000"
-				},
-				{
-					"label": "Neutral",
-					"value": 10,
-					"color": "#808080"
-				},
-				{
-					"label": "Contempt",
-					"value": 10,
-					"color": "#00ccff"
-				},
-				{
-					"label": "Disgust",
-					"value": 10,
-					"color": "#ff8000"
-				},
-				{
-					"label": "Fear",
-					"value": 10,
-					"color": "#000000"
-				},
-				{
-					"label": "Surprise",
-					"value": 10,
-					"color": "#80ffff"
-				},
-			]
-		},
-		"labels": {
-			"outer": {
-				"pieDistance": 32
-			},
-			"inner": {
-				"hideWhenLessThanPercentage": 3
-			},
-			"mainLabel": {
-				"fontSize": 11
-			},
-			"percentage": {
-				"color": "#ffffff",
-				"decimalPlaces": 0
-			},
-			"value": {
-				"color": "#adadad",
-				"fontSize": 11
-			},
-			"lines": {
-				"enabled": true
-			},
-			"truncation": {
-				"enabled": true
-			}
-		},
-		"effects": {
-			"load": {
-				"effect": "none"
-			},
-			"pullOutSegmentOnClick": {
-				"effect": "none",
-			}
-		},
-		"misc": {
-			"gradient": {
-				"enabled": true,
-				"percentage": 100
-			}
-		}
-	});
 
+	// var pie = new d3pie(document.getElementById("pieChart"), {
+	// 	"header": {
+	// 		"title": {
+	// 			"text": "Event Happiness Chart",
+	// 			"color": "#000000",
+	// 			"fontSize": 24,
+	// 			"font": "open sans"
+	// 		},
+	// 		"titleSubtitlePadding": 20
+	// 	},
+	// 	"footer": {
+	// 		"color": "#999999",
+	// 		"fontSize": 10,
+	// 		"font": "open sans",
+	// 		"location": "bottom"
+	// 	},
+	// 	"size": {
+	// 		"canvasWidth": window.innerWidth / 2,
+	// 		"pieInnerRadius": "50%",
+	// 		"pieOuterRadius": "100%"
+	// 	},
+	// 	"data": {
+	// 		"smallSegmentGrouping": {
+	// 			"enabled": true
+	// 		},
+	// 		"sortOrder": "value-desc",
+	// 		"content": [
+	// 			{
+	// 				"label": "Happiness",
+	// 				"value": 10,
+	// 				"color": "#00ff00"
+	// 			},
+	// 			{
+	// 				"label": "Sadness",
+	// 				"value": 10,
+	// 				"color": "#8b6834"
+	// 			},
+	// 			{
+	// 				"label": "Anger",
+	// 				"value": 10,
+	// 				"color": "#ff0000"
+	// 			},
+	// 			{
+	// 				"label": "Neutral",
+	// 				"value": 10,
+	// 				"color": "#808080"
+	// 			},
+	// 			{
+	// 				"label": "Contempt",
+	// 				"value": 10,
+	// 				"color": "#00ccff"
+	// 			},
+	// 			{
+	// 				"label": "Disgust",
+	// 				"value": 10,
+	// 				"color": "#ff8000"
+	// 			},
+	// 			{
+	// 				"label": "Fear",
+	// 				"value": 10,
+	// 				"color": "#000000"
+	// 			},
+	// 			{
+	// 				"label": "Surprise",
+	// 				"value": 10,
+	// 				"color": "#80ffff"
+	// 			},
+	// 		]
+	// 	},
+	// 	"labels": {
+	// 		"outer": {
+	// 			"pieDistance": 32
+	// 		},
+	// 		"inner": {
+	// 			"hideWhenLessThanPercentage": 3
+	// 		},
+	// 		"mainLabel": {
+	// 			"fontSize": 11
+	// 		},
+	// 		"percentage": {
+	// 			"color": "#ffffff",
+	// 			"decimalPlaces": 0
+	// 		},
+	// 		"value": {
+	// 			"color": "#adadad",
+	// 			"fontSize": 11
+	// 		},
+	// 		"lines": {
+	// 			"enabled": true
+	// 		},
+	// 		"truncation": {
+	// 			"enabled": true
+	// 		},
+	// 		"inner": {
+	// 			"hideWhenLessThanPercentage": 5
+	// 		},
+	// 	},
+	// 	"effects": {
+	// 		"load": {
+	// 			"effect": "none"
+	// 		},
+	// 		"pullOutSegmentOnClick": {
+	// 			"effect": "none",
+	// 		}
+	// 	},
+	// 	"misc": {
+	// 		"gradient": {
+	// 			"enabled": true,
+	// 			"percentage": 100
+	// 		}
+	// 	}
+	// });
+
+// Store the displayed angles in _current.
+// Then, interpolate from _current to the new angles.
+// During the transition, _current is updated in-place by d3.interpolate.
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+	window.pie = pie;
+
+	// updatePieData(pie);
+	// getEventInfo(updatePieData, pie);
+	// getEventInfo(updatePieData, pie, 10);
+	// setInterval(updatePieData(pie), 60000);
+	// setInterval(getEventInfo.bind(this, updatePieData, pie, 0.1), 100);
 });
