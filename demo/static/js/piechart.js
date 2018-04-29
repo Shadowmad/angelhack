@@ -11,15 +11,39 @@ window.onload = function(){
 }
 
 $(document).ready(function() {
+	function base64ToBlob(base64, mime)
+	{
+	    mime = mime || '';
+	    var sliceSize = 1024;
+	    var byteChars = window.atob(base64);
+	    var byteArrays = [];
 
+	    for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+	        var slice = byteChars.slice(offset, offset + sliceSize);
+
+	        var byteNumbers = new Array(slice.length);
+	        for (var i = 0; i < slice.length; i++) {
+	            byteNumbers[i] = slice.charCodeAt(i);
+	        }
+
+	        var byteArray = new Uint8Array(byteNumbers);
+
+	        byteArrays.push(byteArray);
+	    }
+
+	    return new Blob(byteArrays, {type: mime});
+	}
 	function saveImageVideoFeed() {
 		var canvas = document.getElementsByTagName('canvas')[0];
 		let dataURL = canvas.toDataURL('image/jpeg', 1.0);
 		$.ajax({
 			type: "POST",
-			url: "/images/upload",
+			url: "/images/upload64",
+			cache: false,
+			contentType: false,
+			processData: false,
 			data: {
-			   file: dataURL
+				file: dataURL
 			}
 		}).done(function(o) {
 			console.log(o);
