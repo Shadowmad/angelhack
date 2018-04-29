@@ -4,7 +4,7 @@ import hashlib
 from demo import app
 from flask import Flask, request, redirect, url_for, send_from_directory
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 def get_extention(filename):
 	return filename.rsplit('.', 1)[1].lower() 
