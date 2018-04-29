@@ -14,6 +14,44 @@ window.onload = function(){
 	var myCamvas = new camvas(ctx, draw)
 }
 
+window.pieData = [];
+
+function getEventInfo(cb, pie, value) {
+	newData = [];
+	$.ajax({
+		type: "GET",
+		url: "/event/info",
+		cache: false,
+		contentType: false,
+		processData: false,
+	}).done(function(data) {
+		for (field in data) {
+			if (field != "_id") {
+				newData.push({
+					label: field.toString(),
+					value: value ? value : data[field]
+				});
+			}
+		}
+		cb(pie, newData);
+	});
+}
+
+function updatePieData(pie, data) {
+		if (window.pieData.length == 0) {
+			window.pieData = data;
+			pie.updateProp("data.content", window.pieData);
+		} else {
+			for (item in data) {
+				window.pieData.find((el, idx) => {
+					if (el.label == item.label) {
+						window.pieData[idx].value = el.value;
+					}
+				})
+			}
+		}
+	};
+
 $(document).ready(function() {
 	function base64ToBlob(base64, mime)
 	{
@@ -61,23 +99,8 @@ $(document).ready(function() {
 		});
 	}
 
-	function updatePieData() {
-
-		$.ajax({
-			type: "GET",
-			url: "/event/info",
-			cache: false,
-			contentType: false,
-			processData: false,
-		}).done(function(data) {
-			oldPieData = pie["data"]
-			for (emotion in data) {
-				oldPieData[emotion] = data[emotion]
-			}
-		});
-	}
-
 	setInterval(saveImageVideoFeed, 5000);
+
 	var pie = new d3pie(document.getElementById("pieChart"), {
 		"header": {
 			"title": {
@@ -100,6 +123,9 @@ $(document).ready(function() {
 			"pieOuterRadius": "100%"
 		},
 		"data": {
+			"smallSegmentGrouping": {
+				"enabled": true
+			},
 			"sortOrder": "value-desc",
 			"content": [
 				{
@@ -167,7 +193,10 @@ $(document).ready(function() {
 			},
 			"truncation": {
 				"enabled": true
-			}
+			},
+			"inner": {
+				"hideWhenLessThanPercentage": 5
+			},
 		},
 		"effects": {
 			"load": {
@@ -185,4 +214,21 @@ $(document).ready(function() {
 		}
 	});
 
+// Store the displayed angles in _current.
+// Then, interpolate from _current to the new angles.
+// During the transition, _current is updated in-place by d3.interpolate.
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+	window.pie = pie;
+
+	// updatePieData(pie);
+	getEventInfo(updatePieData, pie);
+	getEventInfo(updatePieData, pie, 10);
+	// setInterval(updatePieData(pie), 60000);
+	setInterval(getEventInfo.bind(this, updatePieData, pie, 0.1), 100);
 });
