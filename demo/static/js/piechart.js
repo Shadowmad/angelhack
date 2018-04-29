@@ -3,11 +3,15 @@
 // If the browser does not support any URL, getUserMedia or
 // In this example call, we will directly draw the webcam stream on a canvas.
 window.onload = function(){
-  var ctx = document.getElementsByTagName('canvas')[0].getContext('2d')
-  var draw = function(video, dt) {
-    ctx.drawImage(video, 0, 0)
-  }
-  var myCamvas = new camvas(ctx, draw)
+	var ctx = document.getElementsByTagName('canvas')[0].getContext('2d');
+	$("#canvas").attr('width', window.innerWidth / 4);
+	$("#canvas").attr('height',  3 * window.innerWidth / 16);
+	// ctx.canvas.width = window.innerWidth;
+	// ctx.canvas.height = 3 * window.innerWidth / 4;
+	var draw = function(video, dt) {
+		ctx.drawImage(video, 0, 0, window.innerWidth / 4, 3 * window.innerWidth / 16)
+	}
+	var myCamvas = new camvas(ctx, draw)
 }
 
 $(document).ready(function() {

@@ -29,9 +29,12 @@
 input {
     padding-bottom: 10px;
 }
+<<<<<<< HEAD
+=======
 
 .center-block, svg {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+>>>>>>> ecb9e4e4d1d515d0f04cfb365b1d0cef5bc44abb
