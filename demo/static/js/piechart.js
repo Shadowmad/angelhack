@@ -33,9 +33,13 @@ $(document).ready(function() {
 
 	    return new Blob(byteArrays, {type: mime});
 	}
+
 	function saveImageVideoFeed() {
 		var canvas = document.getElementsByTagName('canvas')[0];
 		let dataURL = canvas.toDataURL('image/jpeg', 1.0);
+		var base64ImageContent = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+		let data = base64ToBlob(base64ImageContent, 'image/jpeg');
+		console.log(data);
 		$.ajax({
 			type: "POST",
 			url: "/images/upload64",
@@ -43,7 +47,7 @@ $(document).ready(function() {
 			contentType: false,
 			processData: false,
 			data: {
-				file: dataURL
+				file: data
 			}
 		}).done(function(o) {
 			console.log(o);
