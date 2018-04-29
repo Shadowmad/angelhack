@@ -104,5 +104,6 @@ venv.bak/
 
 demo/static/images/*
 *storage
+demo/scripts/images
 .DS*
 ._*
