@@ -13,12 +13,15 @@ def get_extention(filename):
 def allowed_file(filename):
 	return '.' in filename and get_extention(filename) in ALLOWED_EXTENSIONS
 
-def save_image(file):
-	hash = hashlib.md5(file.filename.encode())
-	# newName = str(hash.hexdigest()) + '.' + get_extention(file.filename)
+def save_base64_image(data, filename):
+	hash = hashlib.md5(filename.encode())
 	timestamp = time.strftime("%m%d%Y-%H:%m:%S")
-	newName =  str(hash.hexdigest()) + '-' + timestamp + '.' + get_extention(file.filename)
-	file.save(os.path.join(app.config['UPLOAD_FOLDER'], newName))	
+	newName =  str(hash.hexdigest()) + '-' + timestamp + '.' + get_extention(filename)
+	newName = os.path.join(app.config['UPLOAD_FOLDER'], newName)
+	# imgdata = base64.b64decode(data)
+	# imgdata = data
+	with open(newName, 'wb') as f:
+			f.write(data.decode('base64'))
 
 @app.route('/images/upload', methods=['POST', 'GET'])
 def	uploadImage():
@@ -43,10 +46,10 @@ def	uploadImage():
 		return 'LOL'
 	return send_from_directory('static', 'html/upload.html')
 
-@app.route('images/upload64', methods=['POST'])
+@app.route('/images/upload64', methods=['POST'])
 def uploadImage64():
-	file = request.files['file']
+	print(request.data)
+	file = request.data
 	if file:
-		img = base64.decodebytes(file)
-		save_image(img)
+		save_base64_image(file, "asd.jpg")
 	return "Done"
