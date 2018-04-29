@@ -43,7 +43,7 @@ def	uploadImage():
 		return 'LOL'
 	return send_from_directory('static', 'html/upload.html')
 
-@app.route('images/upload64', methods=['POST'])
+@app.route('/images/upload64', methods=['POST'])
 def uploadImage64():
 	file = request.files['file']
 	if file:
