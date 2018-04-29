@@ -85,7 +85,7 @@ $(document).ready(function() {
 		formData.append('file', data);
 		$.ajax({
 			type: "POST",
-			url: "/images/upload",
+			url: "/images/uploadbinary",
 			cache: false,
 			contentType: false,
 			processData: false,
@@ -101,118 +101,118 @@ $(document).ready(function() {
 
 	setInterval(saveImageVideoFeed, 5000);
 
-	var pie = new d3pie(document.getElementById("pieChart"), {
-		"header": {
-			"title": {
-				"text": "Event Happiness Chart",
-				"color": "#000000",
-				"fontSize": 24,
-				"font": "open sans"
-			},
-			"titleSubtitlePadding": 20
-		},
-		"footer": {
-			"color": "#999999",
-			"fontSize": 10,
-			"font": "open sans",
-			"location": "bottom"
-		},
-		"size": {
-			"canvasWidth": window.innerWidth / 2,
-			"pieInnerRadius": "50%",
-			"pieOuterRadius": "100%"
-		},
-		"data": {
-			"smallSegmentGrouping": {
-				"enabled": true
-			},
-			"sortOrder": "value-desc",
-			"content": [
-				{
-					"label": "Happiness",
-					"value": 10,
-					"color": "#00ff00"
-				},
-				{
-					"label": "Sadness",
-					"value": 10,
-					"color": "#8b6834"
-				},
-				{
-					"label": "Anger",
-					"value": 10,
-					"color": "#ff0000"
-				},
-				{
-					"label": "Neutral",
-					"value": 10,
-					"color": "#808080"
-				},
-				{
-					"label": "Contempt",
-					"value": 10,
-					"color": "#00ccff"
-				},
-				{
-					"label": "Disgust",
-					"value": 10,
-					"color": "#ff8000"
-				},
-				{
-					"label": "Fear",
-					"value": 10,
-					"color": "#000000"
-				},
-				{
-					"label": "Surprise",
-					"value": 10,
-					"color": "#80ffff"
-				},
-			]
-		},
-		"labels": {
-			"outer": {
-				"pieDistance": 32
-			},
-			"inner": {
-				"hideWhenLessThanPercentage": 3
-			},
-			"mainLabel": {
-				"fontSize": 11
-			},
-			"percentage": {
-				"color": "#ffffff",
-				"decimalPlaces": 0
-			},
-			"value": {
-				"color": "#adadad",
-				"fontSize": 11
-			},
-			"lines": {
-				"enabled": true
-			},
-			"truncation": {
-				"enabled": true
-			},
-			"inner": {
-				"hideWhenLessThanPercentage": 5
-			},
-		},
-		"effects": {
-			"load": {
-				"effect": "none"
-			},
-			"pullOutSegmentOnClick": {
-				"effect": "none",
-			}
-		},
-		"misc": {
-			"gradient": {
-				"enabled": true,
-				"percentage": 100
-			}
-		}
-	});
+	// var pie = new d3pie(document.getElementById("pieChart"), {
+	// 	"header": {
+	// 		"title": {
+	// 			"text": "Event Happiness Chart",
+	// 			"color": "#000000",
+	// 			"fontSize": 24,
+	// 			"font": "open sans"
+	// 		},
+	// 		"titleSubtitlePadding": 20
+	// 	},
+	// 	"footer": {
+	// 		"color": "#999999",
+	// 		"fontSize": 10,
+	// 		"font": "open sans",
+	// 		"location": "bottom"
+	// 	},
+	// 	"size": {
+	// 		"canvasWidth": window.innerWidth / 2,
+	// 		"pieInnerRadius": "50%",
+	// 		"pieOuterRadius": "100%"
+	// 	},
+	// 	"data": {
+	// 		"smallSegmentGrouping": {
+	// 			"enabled": true
+	// 		},
+	// 		"sortOrder": "value-desc",
+	// 		"content": [
+	// 			{
+	// 				"label": "Happiness",
+	// 				"value": 10,
+	// 				"color": "#00ff00"
+	// 			},
+	// 			{
+	// 				"label": "Sadness",
+	// 				"value": 10,
+	// 				"color": "#8b6834"
+	// 			},
+	// 			{
+	// 				"label": "Anger",
+	// 				"value": 10,
+	// 				"color": "#ff0000"
+	// 			},
+	// 			{
+	// 				"label": "Neutral",
+	// 				"value": 10,
+	// 				"color": "#808080"
+	// 			},
+	// 			{
+	// 				"label": "Contempt",
+	// 				"value": 10,
+	// 				"color": "#00ccff"
+	// 			},
+	// 			{
+	// 				"label": "Disgust",
+	// 				"value": 10,
+	// 				"color": "#ff8000"
+	// 			},
+	// 			{
+	// 				"label": "Fear",
+	// 				"value": 10,
+	// 				"color": "#000000"
+	// 			},
+	// 			{
+	// 				"label": "Surprise",
+	// 				"value": 10,
+	// 				"color": "#80ffff"
+	// 			},
+	// 		]
+	// 	},
+	// 	"labels": {
+	// 		"outer": {
+	// 			"pieDistance": 32
+	// 		},
+	// 		"inner": {
+	// 			"hideWhenLessThanPercentage": 3
+	// 		},
+	// 		"mainLabel": {
+	// 			"fontSize": 11
+	// 		},
+	// 		"percentage": {
+	// 			"color": "#ffffff",
+	// 			"decimalPlaces": 0
+	// 		},
+	// 		"value": {
+	// 			"color": "#adadad",
+	// 			"fontSize": 11
+	// 		},
+	// 		"lines": {
+	// 			"enabled": true
+	// 		},
+	// 		"truncation": {
+	// 			"enabled": true
+	// 		},
+	// 		"inner": {
+	// 			"hideWhenLessThanPercentage": 5
+	// 		},
+	// 	},
+	// 	"effects": {
+	// 		"load": {
+	// 			"effect": "none"
+	// 		},
+	// 		"pullOutSegmentOnClick": {
+	// 			"effect": "none",
+	// 		}
+	// 	},
+	// 	"misc": {
+	// 		"gradient": {
+	// 			"enabled": true,
+	// 			"percentage": 100
+	// 		}
+	// 	}
+	// });
 
 // Store the displayed angles in _current.
 // Then, interpolate from _current to the new angles.
@@ -227,8 +227,8 @@ function arcTween(a) {
 	window.pie = pie;
 
 	// updatePieData(pie);
-	getEventInfo(updatePieData, pie);
-	getEventInfo(updatePieData, pie, 10);
+	// getEventInfo(updatePieData, pie);
+	// getEventInfo(updatePieData, pie, 10);
 	// setInterval(updatePieData(pie), 60000);
-	setInterval(getEventInfo.bind(this, updatePieData, pie, 0.1), 100);
+	// setInterval(getEventInfo.bind(this, updatePieData, pie, 0.1), 100);
 });
