@@ -43,7 +43,7 @@ $(document).ready(function() {
 		formData.append('file', data);
 		$.ajax({
 			type: "POST",
-			url: "/images/upload",
+			url: "/images/uploadbinary",
 			cache: false,
 			contentType: false,
 			processData: false,
