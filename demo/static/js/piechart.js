@@ -53,6 +53,22 @@ function updatePieData(pie, data) {
 	};
 
 $(document).ready(function() {
+
+	$.ajax({
+		type: "GET",
+		url: "/event/twitter",
+	}).done(function(data) {
+		if (data.twitter <= 50)
+			$(".twitter_bar").css("backgroundColor", 'rgb(255,116,116)');
+		if (data.twitter > 50 && data.twitter < 75)
+			$(".twitter_bar").css("backgroundColor", 'rgb(253,236,109)');
+		if (data.twitter >= 75)
+			$(".twitter_bar").css("backgroundColor", '#28a745');
+		$(".twitter_bar").css("width", data.twitter + '%');
+		$(".twitter_bar").text(data.twitter + '%');
+	});
+
+
 	function base64ToBlob(base64, mime)
 	{
 	    mime = mime || '';

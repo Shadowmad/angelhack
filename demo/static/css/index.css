@@ -15,6 +15,17 @@ body {
 	margin-top: 5%;
 }
 
+.twitter_bar {
+	text-align: center;
+}
+
+.tiw {
+	color: #333;
+	font-size: 18px;
+	text-align: center;
+	margin: 15px 10px;
+}
+
 /* .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
    background-color: rgba(76, 70, 70, 0.25); // Choose your own color here

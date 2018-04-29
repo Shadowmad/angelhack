@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from demo import app
 from demo.scripts import mongo
 import random
+import json
 
 @app.route('/')
 def home():
@@ -55,13 +56,13 @@ def eventInfoFake():
 
 @app.route('/event/twitter')
 def getTwitterData():
-	with open("../storage/scores.json", "r") as file:
+	with open("demo/storage/scores.json", "r") as file:
 		data = json.load(file)
 
 	if (data):
 		average_score = sum(data) / len(data)
 	if average_score:
-		return average_score * 100
+		return jsonify({'twitter': int(average_score * 100)})
 	else:
 		return jsonify({'No data': 1})
 
