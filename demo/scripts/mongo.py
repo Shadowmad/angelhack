@@ -2,7 +2,7 @@ from pymongo import MongoClient
 
 MONGO_URI = 'mongodb://localhost:27017/'
 
-def save_emotion(conn, event, data):
+def save_emotion(conn, data, event='default'):
 	db = conn.demo
 	coll = db.emotions
 	result = coll.insert_many(data)

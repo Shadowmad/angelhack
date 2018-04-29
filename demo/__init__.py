@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 from demo.scripts.mongo import *
 
-UPLOAD_FOLDER = 'demo/static/images'
+UPLOAD_FOLDER = 'demo/storage/images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.config['MONGO'] = connectDb()
