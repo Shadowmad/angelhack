@@ -11,9 +11,10 @@ headers = {
 	'Ocp-Apim-Subscription-Key':'82654e4421ec4270baedb5ecdbfd5c5e'
 }
 
+conn = mongo.connectDb()
 while True:
-	emotions = []
 	for image in os.listdir(images_dir):
+		emotions = []
 		print(images_dir + image)
 		with open(images_dir + image, 'rb') as file:
 			data = file.read()
@@ -26,8 +27,8 @@ while True:
 				face["timestamp"] = image[6:-4]
 				emotions.append(face)
 				print(face)
-		time.sleep(1)
-	if emotions:
-		conn = mongo.connectDb()
-		mongo.save_emotion(conn, data = emotions)
-		conn.close()
+			if emotions:
+				mongo.save_emotion(conn, data = emotions)
+	time.sleep(1)
+
+conn.close()
