@@ -61,29 +61,22 @@ $(document).ready(function() {
 	var pie = new d3pie(document.getElementById("pieChart"), {
 		"header": {
 			"title": {
-				"text": "Event Happiness Pie Chart",
-				"color": "#d72929",
+				"text": "Event Happiness Chart",
+				"color": "#000000",
 				"fontSize": 24,
 				"font": "open sans"
 			},
-			"subtitle": {
-				"text": "Pie chart that shows percentage of moods on an event",
-				"color": "#999999",
-				"fontSize": 12,
-				"font": "open sans"
-			},
-			"location": "top-left",
-			"titleSubtitlePadding": 5
+			"titleSubtitlePadding": 20
 		},
 		"footer": {
 			"color": "#999999",
 			"fontSize": 10,
 			"font": "open sans",
-			"location": "bottom-left"
+			"location": "bottom"
 		},
 		"size": {
 			"canvasWidth": 590,
-			"pieInnerRadius": "49%",
+			"pieInnerRadius": "50%",
 			"pieOuterRadius": "100%"
 		},
 		"data": {
@@ -91,24 +84,44 @@ $(document).ready(function() {
 			"content": [
 				{
 					"label": "Happy",
-					"value": 67706,
-					"color": "#e65414"
+					"value": 10,
+					"color": "#00ff00"
 				},
 				{
 					"label": "Sad",
-					"value": 36344,
+					"value": 10,
 					"color": "#8b6834"
 				},
 				{
 					"label": "Angry",
-					"value": 32170,
-					"color": "#248838"
+					"value": 10,
+					"color": "#ff0000"
 				},
 				{
 					"label": "Neutral",
-					"value": 1231,
-					"color": "#efefef"
-				}
+					"value": 10,
+					"color": "#808080"
+				},
+				{
+					"label": "Contempt",
+					"value": 10,
+					"color": "#00ccff"
+				},
+				{
+					"label": "Disgusted",
+					"value": 10,
+					"color": "#ff8000"
+				},
+				{
+					"label": "Fear",
+					"value": 10,
+					"color": "#000000"
+				},
+				{
+					"label": "Surprised",
+					"value": 10,
+					"color": "#80ffff"
+				},
 			]
 		},
 		"labels": {
@@ -137,10 +150,11 @@ $(document).ready(function() {
 			}
 		},
 		"effects": {
+			"load": {
+				"effect": "none"
+			},
 			"pullOutSegmentOnClick": {
-				"effect": "linear",
-				"speed": 400,
-				"size": 8
+				"effect": "none",
 			}
 		},
 		"misc": {
