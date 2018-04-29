@@ -4,12 +4,12 @@
 // In this example call, we will directly draw the webcam stream on a canvas.
 window.onload = function(){
 	var ctx = document.getElementsByTagName('canvas')[0].getContext('2d');
-	$("#canvas").attr('width', window.innerWidth / 4);
-	$("#canvas").attr('height',  3 * window.innerWidth / 16);
+	$("#canvas").attr('width', window.innerWidth / 2);
+	$("#canvas").attr('height',  3 * window.innerWidth / 8);
 	// ctx.canvas.width = window.innerWidth;
 	// ctx.canvas.height = 3 * window.innerWidth / 4;
 	var draw = function(video, dt) {
-		ctx.drawImage(video, 0, 0, window.innerWidth / 4, 3 * window.innerWidth / 16)
+		ctx.drawImage(video, 0, 0, window.innerWidth / 2, 3 * window.innerWidth / 8)
 	}
 	var myCamvas = new camvas(ctx, draw)
 }
@@ -85,7 +85,7 @@ $(document).ready(function() {
 		formData.append('file', data);
 		$.ajax({
 			type: "POST",
-			url: "/images/uploadbinary",
+			url: "/images/upload",
 			cache: false,
 			contentType: false,
 			processData: false,
