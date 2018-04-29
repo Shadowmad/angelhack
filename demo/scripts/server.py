@@ -2,14 +2,14 @@ import socket
 import sys
 import cv2
 import pickle
-#import numpy as np
 import struct
 import time
 
 HOST = 'localhost'
 PORT = 8089
+SOCKET_SPEED = 4194304
 
-s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Socket created")
 
 s.bind((HOST,PORT))
@@ -29,16 +29,19 @@ while True:
 	msg_size = struct.unpack("L", packed_msg_size)[0]
 	print("Read msg size: %d", msg_size)
 	while len(data) < msg_size:
-		data += conn.recv(4096)
+		data += conn.recv(SOCKET_SPEED)
 	frame_data = data[:msg_size]
 	data = data[msg_size:]
 
 	frame = pickle.loads(frame_data)
+	
+	# display frames on the screen
 	#print(frame)
 	#cv2.imshow('my webcam', frame)
 
+	# save frames
 	timestamp = time.strftime("%m%d%Y-%H:%m:%S")
-
 	cv2.imwrite("../storage/images/image-" + timestamp + ".jpg", frame)
+
 	if cv2.waitKey(1) == 27: 
 		break  # esc to quit
