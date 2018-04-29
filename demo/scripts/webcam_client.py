@@ -12,8 +12,7 @@ def read_webcam():
 		ret_val, frame = cam.read()
 		data = pickle.dumps(frame)
 		data = struct.pack("L", len(data)) + data
-		#data = data.encode("utf-8")
-		print(len(data))
+
 		# sending frame to the server
 		clientsocket.sendall(data)
 
