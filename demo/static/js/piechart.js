@@ -33,18 +33,21 @@ $(document).ready(function() {
 
 	    return new Blob(byteArrays, {type: mime});
 	}
+
 	function saveImageVideoFeed() {
 		var canvas = document.getElementsByTagName('canvas')[0];
 		let dataURL = canvas.toDataURL('image/jpeg', 1.0);
+		var base64ImageContent = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+		let data = base64ToBlob(base64ImageContent, 'image/jpeg');
+		var formData = new FormData();
+		formData.append('file', data);
 		$.ajax({
 			type: "POST",
-			url: "/images/upload64",
+			url: "/images/upload",
 			cache: false,
 			contentType: false,
 			processData: false,
-			data: {
-				file: dataURL
-			}
+			data: formData
 		}).done(function(o) {
 			console.log(o);
 			// If you want the file to be visible in the browser
