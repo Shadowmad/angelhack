@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-from demo.lib.mongo import *
+from demo.scripts.mongo import *
 
 UPLOAD_FOLDER = 'demo/static/images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
