@@ -1,10 +1,13 @@
 from pymongo import MongoClient
+import time;
 
 MONGO_URI = 'mongodb://localhost:27017/'
 
 def save_emotion(conn, data, event='default'):
 	db = conn.demo
 	coll = db.emotions
+	for el in data:
+		el['tiemstamp'] =  time.time()*1000.0
 	result = coll.insert_many(data)
 
 def connectDb():
