@@ -18,11 +18,12 @@ for image in os.listdir(images_dir):
 		data = file.read()
 		# os.remove(images_dir + image)
 	response = requests.post(url, headers = headers, data = data)
-	if response.json():
-		emotion = response.json()[0]["faceAttributes"]["emotion"]
-		emotion["timestamp"] = image[6:-4]
-		emotions.append(emotion)
-		print(emotion)
+	faces = response.json()
+	for face in faces:
+		face["faceAttributes"]["emotion"]
+		face["timestamp"] = image[6:-4]
+		emotions.append(face)
+		print(face)
 	time.sleep(3)
 
-mongo.save_emotion(conn, data=emotions)
+mongo.save_emotion(conn, data = emotions)
