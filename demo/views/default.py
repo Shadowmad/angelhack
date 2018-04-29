@@ -24,7 +24,7 @@ def eventInfo():
 					"Disgust": { "$avg": "$disgust" },
 					"Fear": { "$avg": "$fear" },
 					"Happiness": { "$avg": "$happiness" },
-					"Neutral": { "$avg": "$neutral" },
+					# "Neutral": { "$avg": "$neutral" },
 					"Sadness": { "$avg": "$sadness" },
 					"Surprise": { "$avg": "$surprise" },
 				}
@@ -32,7 +32,11 @@ def eventInfo():
 		]
 	)
 	client.close()
-	return jsonify(list(result)[0])
+	result = list(result)
+	if result:
+		return jsonify(list(result)[0])
+	else:
+		return jsonify({'No data': 1})
 
 @app.route('/event/infofake')
 def eventInfoFake():
