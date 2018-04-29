@@ -102,6 +102,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-demo/script/images/*
+demo/script/images/
 .DS*
 ._*
