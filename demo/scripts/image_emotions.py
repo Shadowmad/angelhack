@@ -18,7 +18,8 @@ for image in os.listdir(images_dir):
 		data = file.read()
 		# os.remove(images_dir + image)
 	response = requests.post(url, headers = headers, data = data)
-	emotion = response.json()[0]["faceAttributes"]["emotion"]
+	if response.json is not []:
+		emotion = response.json()[0]["faceAttributes"]["emotion"]
 	emotion["timestamp"] = image[6:-4]
 	emotions.append(emotion)
 	print(emotion)
