@@ -1,4 +1,5 @@
 import os
+import time
 import hashlib
 from demo import app
 from flask import Flask, request, redirect, url_for, send_from_directory
@@ -25,7 +26,9 @@ def	uploadImage():
 			return redirect(request.url)
 		if file and allowed_file(file.filename):
 			hash = hashlib.md5(file.filename.encode())
-			newName = str(hash.hexdigest()) + '.' + get_extention(file.filename)
+			# newName = str(hash.hexdigest()) + '.' + get_extention(file.filename)
+			timestamp = time.strftime("%m%d%Y-%H:%m:%S")
+			newName = 'image-' + timestamp + '.' + get_extention(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], newName))
 			# file.save(file.filename)
 			return 'Uploaded'
