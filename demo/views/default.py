@@ -20,8 +20,8 @@ def eventInfo():
 				{
 					"_id": "$item",
 					"Anger": { "$avg": "$anger" },
-					"Contempt": { "$avg": "$contempt" },
-					"Disgust": { "$avg": "$disgust" },
+					# "Contempt": { "$avg": "$contempt" },
+					# "Disgust": { "$avg": "$disgust" },
 					"Fear": { "$avg": "$fear" },
 					"Happiness": { "$avg": "$happiness" },
 					# "Neutral": { "$avg": "$neutral" },
