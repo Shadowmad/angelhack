@@ -25,4 +25,4 @@ def	uploadImage():
 			# file.save(file.filename)
 			return 'Uploaded'
 		return 'LOL'
-	return send_from_directory('static', 'upload.html')
+	return send_from_directory('static', 'html/upload.html')
