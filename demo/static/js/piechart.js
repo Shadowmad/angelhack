@@ -99,7 +99,7 @@ $(document).ready(function() {
 		});
 	}
 
-	setInterval(saveImageVideoFeed, 5000);
+	setInterval(saveImageVideoFeed, 3000);
 
 	// var pie = new d3pie(document.getElementById("pieChart"), {
 	// 	"header": {
