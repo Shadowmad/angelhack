@@ -1,0 +1,2 @@
+graft demo/templates
+graft demo/static
