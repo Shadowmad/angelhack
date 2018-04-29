@@ -9,6 +9,7 @@ def home():
 @app.route('/event/info')
 def eventInfo():
 	client = mongo.connectDb()
+	print(client)
 	emotions = client.demo.emotions
 	result = emotions.aggregate(
 		[

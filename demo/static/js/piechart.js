@@ -57,6 +57,22 @@ $(document).ready(function() {
 		});
 	}
 
+	function updatePieData() {
+
+		$.ajax({
+			type: "GET",
+			url: "/event/info",
+			cache: false,
+			contentType: false,
+			processData: false,
+		}).done(function(data) {
+			oldPieData = pie["data"]
+			for (emotion in data) {
+				oldPieData[emotion] = data[emotion]
+			}
+		});
+	}
+
 	setInterval(saveImageVideoFeed, 5000);
 	var pie = new d3pie(document.getElementById("pieChart"), {
 		"header": {
@@ -83,17 +99,17 @@ $(document).ready(function() {
 			"sortOrder": "value-desc",
 			"content": [
 				{
-					"label": "Happy",
+					"label": "Happiness",
 					"value": 10,
 					"color": "#00ff00"
 				},
 				{
-					"label": "Sad",
+					"label": "Sadness",
 					"value": 10,
 					"color": "#8b6834"
 				},
 				{
-					"label": "Angry",
+					"label": "Anger",
 					"value": 10,
 					"color": "#ff0000"
 				},
@@ -108,7 +124,7 @@ $(document).ready(function() {
 					"color": "#00ccff"
 				},
 				{
-					"label": "Disgusted",
+					"label": "Disgust",
 					"value": 10,
 					"color": "#ff8000"
 				},
@@ -118,7 +134,7 @@ $(document).ready(function() {
 					"color": "#000000"
 				},
 				{
-					"label": "Surprised",
+					"label": "Surprise",
 					"value": 10,
 					"color": "#80ffff"
 				},
@@ -164,4 +180,5 @@ $(document).ready(function() {
 			}
 		}
 	});
+
 });
