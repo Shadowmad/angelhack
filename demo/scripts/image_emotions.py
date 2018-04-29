@@ -5,10 +5,10 @@ import time
 import mongo
 
 images_dir = "../storage/images/"
-url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=false&returnFaceAttributes=emotion'
+face_recognition_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=false&returnFaceAttributes=emotion'
 headers = {
 	'Content-Type': 'application/octet-stream',
-	'Ocp-Apim-Subscription-Key':'e58d8c595daf4cdc949d411007e8d43f'
+	'Ocp-Apim-Subscription-Key':'82654e4421ec4270baedb5ecdbfd5c5e'
 }
 
 while True:
@@ -18,7 +18,7 @@ while True:
 		with open(images_dir + image, 'rb') as file:
 			data = file.read()
 			os.remove(images_dir + image)
-		response = requests.post(url, headers = headers, data = data)
+		response = requests.post(face_recognition_api_url, headers = headers, data = data)
 		if response.ok:
 			faces = response.json()
 			for face in faces:
@@ -26,10 +26,8 @@ while True:
 				face["timestamp"] = image[6:-4]
 				emotions.append(face)
 				print(face)
-		time.sleep(3)
-
+		time.sleep(1)
 	if emotions:
 		conn = mongo.connectDb()
 		mongo.save_emotion(conn, data = emotions)
 		conn.close()
-	time.sleep(10)
