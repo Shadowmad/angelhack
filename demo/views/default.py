@@ -42,16 +42,28 @@ def eventInfo():
 def eventInfoFake():
 	fake = {
 		"Anger": random.uniform(0.1, 0.3),
-		"Contempt": random.uniform(0.1, 0.3), 
-		"Disgust": random.uniform(0.1, 0.3), 
-		"Fear": random.uniform(0.1, 0.3), 
-		"Happiness": random.uniform(0.1, 0.3), 
-		"Neutral": random.uniform(0.1, 0.3), 
-		"Sadness": random.uniform(0.1, 0.3), 
-		"Surprise": random.uniform(0.1, 0.3), 
+		"Contempt": random.uniform(0.1, 0.3),
+		"Disgust": random.uniform(0.1, 0.3),
+		"Fear": random.uniform(0.1, 0.3),
+		"Happiness": random.uniform(0.1, 0.3),
+		"Neutral": random.uniform(0.1, 0.3),
+		"Sadness": random.uniform(0.1, 0.3),
+		"Surprise": random.uniform(0.1, 0.3),
 		"_id": "asd"
 	}
 	return jsonify(fake)
+
+@app.route('/event/twitter')
+def getTwitterData():
+	with open("../storage/scores.json", "r") as file:
+		data = json.load(file)
+
+	if (data):
+		average_score = sum(data) / len(data)
+	if average_score:
+		return average_score * 100
+	else:
+		return jsonify({'No data': 1})
 
 @app.route('/static/<path:path>')
 def static_file(path):
