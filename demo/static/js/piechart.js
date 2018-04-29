@@ -77,7 +77,7 @@ $(document).ready(function() {
 		});
 	}
 
-	setInterval(saveImageVideoFeed, 5000);
+	// setInterval(saveImageVideoFeed, 5000);
 	var pie = new d3pie(document.getElementById("pieChart"), {
 		"header": {
 			"title": {
@@ -95,7 +95,7 @@ $(document).ready(function() {
 			"location": "bottom"
 		},
 		"size": {
-			"canvasWidth": 590,
+			"canvasWidth": window.innerWidth / 2,
 			"pieInnerRadius": "50%",
 			"pieOuterRadius": "100%"
 		},

@@ -14,3 +14,9 @@ body {
 .marginatigchild {
 	margin-top: 5%;
 }
+
+/* .table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: rgba(76, 70, 70, 0.25); // Choose your own color here
+ }
+ */

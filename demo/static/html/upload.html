@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="/static/css/style.css">
 	</head>
 	<body>
-		<div class="container">
+		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			  <a class="navbar-brand" href="/">Event</a>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,10 +33,12 @@
 			  </div>
 			</nav>
 			<div class="row padding-top">
-				<div class="col-lg-1 col-centered">
+				<div class="col-lg-2 col-centered">
 					<form action = "/images/upload" method = "POST" enctype = "multipart/form-data">
-						<input class="btn btn-primary" type = "file" name = "file" multiple />
-						<input class="btn btn-primary" type = "submit"/>
+						<div class="files_box">
+						</div>
+						<input class="file_upload btn btn-primary" type = "file" name = "file" multiple />
+						<input class="submit btn btn-outline-primary" type = "submit"/>
 					</form>
 				</div>
 			</div>

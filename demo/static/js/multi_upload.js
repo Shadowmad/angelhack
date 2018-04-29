@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+	$(".files_box").on('click', function(e) {
+		e.preventDefault();
+		$('.file_upload').click();
+	});
+
 	$('#multi_file_upload').change(function(e) {
 	    var file_id = e.target.id;
 		// var site_url = 'localhost:5000';

@@ -29,12 +29,27 @@
 input {
     padding-bottom: 10px;
 }
-<<<<<<< HEAD
-=======
 
-.center-block, svg {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.files_box {
+	display: block;
+	width: 100%;
+	height: 8em;
+	border: 1px solid #e8e8e8;
+	text-align: center;
+	color: #b5b5b56b;
 }
->>>>>>> ecb9e4e4d1d515d0f04cfb365b1d0cef5bc44abb
+
+.files_box::after {
+	content: '+';
+	font-size: 5em;
+	text-align: center;
+}
+
+.file_upload {
+	display: none;
+}
+
+.submit {
+	width: 100%;
+	margin: 10px 0;
+}
