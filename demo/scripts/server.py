@@ -39,6 +39,6 @@ while True:
 
 	timestamp = time.strftime("%m%d%Y-%H:%m:%S")
 
-	cv2.imwrite("images/image-" + timestamp + ".jpg", frame)
+	cv2.imwrite("../storage/images/image-" + timestamp + ".jpg", frame)
 	if cv2.waitKey(1) == 27: 
 		break  # esc to quit
