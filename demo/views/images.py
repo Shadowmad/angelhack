@@ -1,6 +1,6 @@
 import os
 import hashlib
-from demo	import app
+from demo import app
 from flask import Flask, request, redirect, url_for, send_from_directory
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
